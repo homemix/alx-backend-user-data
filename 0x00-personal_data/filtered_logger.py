@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 
 def filter_datum(fields: list[str],
-                 redaction: str, message: str, separator: str):
+                 redaction: str,
+                 message: str, separator: str) -> str:
     """
     Filter a message based on a list of fields and a redaction string.
     :param fields:
