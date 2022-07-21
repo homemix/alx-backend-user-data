@@ -3,9 +3,10 @@
 re sub for personal data
 """
 import re
+from typing import List
 
 
-def filter_datum(fields: list[str],
+def filter_datum(fields: List[str],
                  redaction: str,
                  message: str, separator: str) -> str:
     """
