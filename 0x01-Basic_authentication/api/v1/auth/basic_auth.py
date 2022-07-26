@@ -3,8 +3,10 @@
 A basic auth class implementation
 """
 from base64 import b64decode
+from typing import TypeVar
 
 from .auth import Auth
+from api.models.user import User
 
 
 class BasicAuth(Auth):
@@ -68,3 +70,27 @@ class BasicAuth(Auth):
         if len(user_credentials) != 2:
             return None, None
         return user_credentials[0], user_credentials[1]
+
+    def user_object_from_credentials(
+            self, user_email: str, user_pwd: str) -> TypeVar('User'):
+        """
+        get the user object from the credentials
+        :param user_email:
+        :param user_pwd:
+        :return:
+        """
+        if user_email is None or user_pwd is None:
+            return None
+        if not isinstance(user_email, str) or not isinstance(user_pwd, str):
+            return None
+
+        try:
+            found_users = User.search({'email': user_email})
+        except Exception:
+            return None
+
+        for user in found_users:
+            if user.is_valid_password(user_pwd):
+                return user
+
+        return None
