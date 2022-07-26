@@ -18,19 +18,18 @@ class Auth:
         :param excluded_paths:
         :return:
         """
-        if excluded_paths is not None:
-            if path not in excluded_paths:
-                return True
-        if path is None:
+        if not path or not excluded_paths:
             return True
-        if excluded_paths is None or len(excluded_paths) == 0:
-            return True
-        if excluded_paths is not None:
-            if path in excluded_paths:
+        if path in excluded_paths:
+            return False
+        if path[-1] != '/' and path + '/' \
+                in excluded_paths:
+            return False
+        for p in excluded_paths:
+            if p.endswith('*') and \
+                    path.startswith(p[:-1]):
                 return False
-            if path[:-1] in excluded_paths or path + "/" in excluded_paths:
-                return False
-        return False
+        return True
 
     def authorization_header(self, request=None) -> str:
         """
