@@ -2,6 +2,8 @@
 """
 A basic auth class implementation
 """
+from base64 import b64decode
+
 from .auth import Auth
 
 
@@ -24,3 +26,25 @@ class BasicAuth(Auth):
             return None
 
         return authorization_header[6:]
+
+    def decode_base64_authorization_header(self,
+                                           base64_authorization_header: str) \
+            -> str:
+        """
+        decode the base64 authorization header
+        :param base64_authorization_header:
+        :return:
+        """
+        if base64_authorization_header is None:
+            return None
+        if not isinstance(base64_authorization_header, str):
+            return None
+
+        try:
+            encoded = base64_authorization_header.encode('utf-8')
+            decoded64 = b64decode(encoded)
+            decoded = decoded64.decode('utf-8')
+        except BaseException:
+            return None
+
+        return decoded
