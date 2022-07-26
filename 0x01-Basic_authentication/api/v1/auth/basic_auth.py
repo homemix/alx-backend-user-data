@@ -3,10 +3,11 @@
 A basic auth class implementation
 """
 from base64 import b64decode
-from typing import TypeVar
+
 
 from .auth import Auth
 from api.models.user import User
+from typing import TypeVar
 
 
 class BasicAuth(Auth):
