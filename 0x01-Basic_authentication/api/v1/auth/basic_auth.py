@@ -2,11 +2,9 @@
 """
 A basic auth class implementation
 """
+from api.v1.auth.auth import Auth
 from base64 import b64decode
-
-
-from .auth import Auth
-from api.models.user import User
+from models.user import User
 from typing import TypeVar
 
 
