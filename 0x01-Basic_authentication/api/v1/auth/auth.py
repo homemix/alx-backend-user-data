@@ -28,8 +28,8 @@ class Auth:
         if excluded_paths is not None:
             if path in excluded_paths:
                 return False
-        if path[:-1] in excluded_paths or path+"/" in excluded_paths:
-            return False
+            if path[:-1] in excluded_paths or path + "/" in excluded_paths:
+                return False
         return False
 
     def authorization_header(self, request=None) -> str:
