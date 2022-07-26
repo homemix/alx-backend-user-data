@@ -51,12 +51,11 @@ class BasicAuth(Auth):
 
     def extract_user_credentials(self,
                                  decoded_base64_authorization_header: str) \
-            -> (
-                    str, str):
+            -> (str, str):
         """
-        extract user credentials
-        :param decoded_base64_authorization_header: 
-        :return: 
+        extract the user credentials
+        :param decoded_base64_authorization_header:
+        :return:
         """
         if decoded_base64_authorization_header is None:
             return None, None
