@@ -3,7 +3,6 @@
 Session Auth Class
 """
 
-
 from .auth import Auth
 import uuid
 
