@@ -46,3 +46,20 @@ class SessionAuth(Auth):
             return None
         user = User.get(user_id)
         return user
+
+    def destroy_session(self, request=None):
+        """
+        destroy session method
+        :param request:
+        :return:
+        """
+        if request is None:
+            return False
+        if self.session_cookie(request) is None:
+            return False
+
+        if self.user_id_for_session_id(self.session_cookie(request)) is None:
+            return False
+        if self.session_cookie(request) in self.user_id_by_session_id:
+            del self.user_id_by_session_id[self.session_cookie(request)]
+
