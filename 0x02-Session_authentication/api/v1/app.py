@@ -82,7 +82,7 @@ def before_request() -> str:
         abort(403)
 
     if auth.session_cookie(request) is None:
-        abort(403)
+        abort(401)
 
 
 if __name__ == "__main__":
