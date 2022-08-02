@@ -39,7 +39,7 @@ class DB:
 
         return user
 
-    def find_user_by(self, **kwargs)-> User:
+    def find_user_by(self, **kwargs) -> User:
         """ Finds user by given parameters
         Return: User Object
         """
