@@ -6,6 +6,7 @@ Auth module
 from bcrypt import hashpw, gensalt
 from db import DB
 from user import User
+from sqlalchemy.orm.exc import NoResultFound
 
 
 def _hash_password(password: str) -> bytes:
@@ -25,9 +26,16 @@ class Auth:
         self._db = DB()
 
     def register_user(self, email: str, password: str) -> User:
-        user = self._db.find_user_by(email=email)
-        if user:
-            raise ValueError('user {} already exists'.format(email))
-        pwd_hash = _hash_password(password)
-        self._db.add_user(email=email, hashed_password=pwd_hash)
-        return user
+        """
+        register new user
+        :param email:
+        :param password:
+        :return:
+        """
+        try:
+            self._db.find_user_by(email=email)
+            raise ValueError(f"User {email} already exists.")
+        except NoResultFound:
+            pwd_hash = _hash_password(password)
+            new_user = self._db.add_user(email=email, hashed_password=pwd_hash)
+            return new_user
