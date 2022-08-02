@@ -6,7 +6,7 @@ Auth module
 from bcrypt import hashpw, gensalt
 
 
-def _hash_password(password):
+def _hash_password(password) -> bytes:
     """
     Hash a password
     :param password:
