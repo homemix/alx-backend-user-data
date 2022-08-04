@@ -136,4 +136,5 @@ class Auth:
 
         if user:
             pwd_hash = _hash_password(password)
-            self._db.update_user(user.id, hashed_password=pwd_hash, reset_token=None)
+            self._db.update_user(user.id,
+                                 hashed_password=pwd_hash, reset_token=None)
