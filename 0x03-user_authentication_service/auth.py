@@ -2,6 +2,8 @@
 """
 Auth module
 """
+import uuid
+
 import bcrypt
 from bcrypt import hashpw, gensalt
 from db import DB
@@ -55,3 +57,10 @@ class Auth:
             if bcrypt.checkpw(password.encode('utf-8'), user.hashed_password):
                 return True
         return False
+
+    def _generate_uuid(self) -> str:
+        """
+        generate a uuid
+        :return:
+        """
+        return str(uuid.uuid4())
