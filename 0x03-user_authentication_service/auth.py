@@ -112,8 +112,8 @@ class Auth:
         """
         try:
             user = self._db.find_user_by(email=email)
-        except ValueError:
-            return None
+        except NoResultFound:
+            raise ValueError()
 
         if user:
             reset_token = _generate_uuid()
