@@ -39,3 +39,16 @@ class Auth:
             pwd_hash = _hash_password(password)
             new_user = self._db.add_user(email=email, hashed_password=pwd_hash)
             return new_user
+
+    def valid_login(self, email: str, password: str) -> bool:
+        """
+        validate user login
+        :param email:
+        :param password:
+        :return:
+        """
+        user = self._db.find_user_by(email=email)
+        if user:
+            if user.hashed_password == _hash_password(password):
+                return True
+        return False
