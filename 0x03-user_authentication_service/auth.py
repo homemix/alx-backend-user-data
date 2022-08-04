@@ -119,3 +119,19 @@ class Auth:
             reset_token = _generate_uuid()
             self._db.update_user(user.id, reset_token=reset_token)
         return reset_token
+
+    def update_password(self, reset_token: str, password: str) -> None:
+        """
+        update password
+        :param reset_token:
+        :param password:
+        :return:
+        """
+        try:
+            user = self._db.find_user_by(reset_token=reset_token)
+        except NoResultFound:
+            raise ValueError()
+
+        if user:
+            pwd_hash = _hash_password(password)
+            self._db.update_user(user.id, hashed_password=pwd_hash, reset_token=None)
