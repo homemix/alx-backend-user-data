@@ -96,7 +96,7 @@ class Auth:
 
         return user
 
-    def destroy_session(self,user_id: int) -> None:
+    def destroy_session(self, user_id: int) -> None:
         """
         destroy session for user
         :param user_id:
