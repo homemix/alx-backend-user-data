@@ -9,6 +9,7 @@ from bcrypt import hashpw, gensalt
 from db import DB
 from user import User
 from sqlalchemy.orm.exc import NoResultFound
+import uuid
 
 
 def _hash_password(password: str) -> bytes:
@@ -20,11 +21,8 @@ def _hash_password(password: str) -> bytes:
     return hashpw(password.encode('utf-8'), gensalt())
 
 
-def _generate_uuid(self) -> str:
-    """
-    generate a uuid
-    :return:
-    """
+def _generate_uuid() -> str:
+    """Returns a string representation of a new UUID"""
     return str(uuid.uuid4())
 
 
